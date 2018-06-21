@@ -49,8 +49,16 @@ class SudokuGame
   def play_turn
     board.render
     pos = get_pos
+    if @board[pos].given?
+      puts "You can't change the value of a given tile."
+      return
+    end
     val = get_val
-    board[pos] = val
+    if uniq_on_square(pos,val) && uniq_on_board(pos,val)
+      board[pos] = val
+    else
+      puts 'You can\'t put this value in that position'
+    end
   end
 
   def run
@@ -67,6 +75,30 @@ class SudokuGame
     pos.is_a?(Array) &&
       pos.length == 2 &&
       pos.all? { |x| x.between?(0, board.size - 1) }
+
+  end
+
+  def uniq_on_square(pos,val)
+    x,y = pos
+    x = (x / 3) *3
+    y = y/3 * 3
+    (x..x+2).each do |row|
+      (y..y+2).each do |col|
+        return false if val==@board[[x,y]].value
+      end
+    end
+    true
+  end
+
+  def uniq_on_board(pos,val)
+    x,y = pos
+    (0..8).each do |col|
+      return false if @board[[x,col]].value == val
+    end
+    (0..8).each do |row|
+      return false if @board[[row,y]].value == val
+    end
+    true
   end
 
   def valid_val?(val)

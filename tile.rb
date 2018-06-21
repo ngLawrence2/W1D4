@@ -21,10 +21,6 @@ class Tile
   end
 
   def value=(new_value)
-    if given?
-      puts "You can't change the value of a given tile."
-    else
-      @value = new_value
-    end
+    @value = new_value
   end
 end
