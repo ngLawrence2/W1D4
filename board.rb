@@ -44,11 +44,11 @@ class Board
   end
 
   def rows
-    grid
+    @grid
   end
 
   def size
-    grid.size
+    @grid.size
   end
 
   def solved?
