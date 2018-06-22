@@ -5,9 +5,10 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   colorize
 
 BUNDLED WITH
-   1.11.2
+   1.16.1
